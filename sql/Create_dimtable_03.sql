@@ -5,6 +5,8 @@ GO
 -- Layer: Enterprise Data Warehouse (EDW) Layer (Tier 3)
 -- Namespace: dw (Clean, indexed dimensional model)
 -- Table: dw.dim_customer_profile
+-- Description: Customer dimension retaining natural business key (customer_id)
+--              and establishing surrogate key (customer_sk).
 -- Source: stage.retail_banking_crm & stage.credit_and_risk
 -- ============================================================================
 IF OBJECT_ID('dw.dim_customer_profile', 'U') IS NOT NULL
@@ -12,7 +14,8 @@ IF OBJECT_ID('dw.dim_customer_profile', 'U') IS NOT NULL
 GO
 
 CREATE TABLE dw.dim_customer_profile (
-    profile_key INT IDENTITY(1,1) PRIMARY KEY,
+    customer_sk INT IDENTITY(1,1) PRIMARY KEY,
+    customer_id INT NOT NULL,
     age INT NOT NULL,
     age_band VARCHAR(12) NOT NULL,
     job VARCHAR(50),
@@ -20,13 +23,15 @@ CREATE TABLE dw.dim_customer_profile (
     education VARCHAR(30),
     default_status VARCHAR(10),
     housing_loan VARCHAR(10),
-    personal_loan VARCHAR(10)
+    personal_loan VARCHAR(10),
+    CONSTRAINT UQ_dim_customer_profile_customer_id UNIQUE (customer_id)
 );
 GO
 
 INSERT INTO dw.dim_customer_profile
-    (age, age_band, job, marital, education, default_status, housing_loan, personal_loan)
-SELECT DISTINCT
+    (customer_id, age, age_band, job, marital, education, default_status, housing_loan, personal_loan)
+SELECT
+    c.customer_id,
     c.age,
     CASE
         WHEN c.age < 30 THEN 'Under 30'
@@ -35,10 +40,20 @@ SELECT DISTINCT
         WHEN c.age < 60 THEN '50-59'
         ELSE '60 and over'
     END,
-    c.job, c.marital, c.education,
-    r.[default], r.housing, r.loan
+    c.job, 
+    c.marital, 
+    c.education,
+    r.[default], 
+    r.housing, 
+    r.loan
 FROM stage.retail_banking_crm AS c
 JOIN stage.credit_and_risk AS r ON c.customer_id = r.customer_id;
 GO
 
-SELECT COUNT(*) AS profiles FROM dw.dim_customer_profile;
+SELECT 
+    COUNT(*) AS total_customers, 
+    COUNT(DISTINCT customer_id) AS unique_customers,
+    MIN(customer_sk) AS min_sk,
+    MAX(customer_sk) AS max_sk
+FROM dw.dim_customer_profile;
+GO

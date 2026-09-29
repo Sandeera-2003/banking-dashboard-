@@ -6,6 +6,7 @@ GO
 -- Namespace: mart
 -- Table: mart.marketing_performance
 -- Description: Aggregated departmental rollup for BI dashboards and reporting
+-- Join Pattern: Clean single-integer foreign key join on customer_sk
 -- ============================================================================
 IF OBJECT_ID('mart.marketing_performance', 'U') IS NOT NULL
     DROP TABLE mart.marketing_performance;
@@ -22,7 +23,7 @@ CREATE TABLE mart.marketing_performance (
 );
 GO
 
-
+-- Populates aggregated mart joining on single integer key (f.customer_sk = p.customer_sk)
 INSERT INTO mart.marketing_performance
     (month_key, job, channel_key, contacts, subscriptions, total_duration_seconds)
 SELECT
@@ -33,9 +34,15 @@ SELECT
     SUM(CAST(f.is_subscribed AS INT)),
     SUM(CAST(f.duration_seconds AS BIGINT))
 FROM dw.fact_contact AS f
-JOIN dw.dim_customer_profile AS p ON f.profile_key = p.profile_key
+JOIN dw.dim_customer_profile AS p 
+    ON f.customer_sk = p.customer_sk
 GROUP BY f.month_key, p.job, f.channel_key;
 GO
 
-SELECT SUM(contacts) AS contacts, SUM(subscriptions) AS subscriptions
+SELECT 
+    COUNT(*) AS total_mart_rows,
+    SUM(contacts) AS contacts, 
+    SUM(subscriptions) AS subscriptions,
+    SUM(total_duration_seconds) AS total_call_seconds
 FROM mart.marketing_performance;
+GO
