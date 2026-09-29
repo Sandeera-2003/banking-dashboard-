@@ -1,12 +1,26 @@
-CREATE TABLE retail_banking_crm (
-    customer_id INT PRIMARY KEY,
+USE DWBI_Bank;
+GO
+
+-- ============================================================================
+-- Layer: Staging Storage Layer (Tier 2)
+-- Namespace: stage
+-- Table: stage.retail_banking_crm
+-- Characteristics: Raw, unindexed, temporary heap table matching CRM source structure
+-- ============================================================================
+IF OBJECT_ID('stage.retail_banking_crm', 'U') IS NOT NULL
+    DROP TABLE stage.retail_banking_crm;
+GO
+
+CREATE TABLE stage.retail_banking_crm (
+    customer_id INT NOT NULL,
     age INT NOT NULL,
     job VARCHAR(50),
     marital VARCHAR(20),
     education VARCHAR(30)
 );
+GO
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (1, 56, 'housemaid', 'married', 'basic.4y'),
 (2, 57, 'services', 'married', 'high.school'),
 (3, 37, 'services', 'married', 'high.school'),
@@ -508,7 +522,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (499, 53, 'admin.', 'married', 'professional.course'),
 (500, 51, 'admin.', 'married', 'basic.6y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (501, 56, 'entrepreneur', 'married', 'university.degree'),
 (502, 33, 'admin.', 'married', 'basic.9y'),
 (503, 33, 'admin.', 'married', 'basic.9y'),
@@ -1010,7 +1024,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (999, 57, 'technician', 'married', 'basic.9y'),
 (1000, 30, 'services', 'married', 'unknown');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (1001, 34, 'entrepreneur', 'married', 'basic.4y'),
 (1002, 34, 'technician', 'married', 'high.school'),
 (1003, 38, 'blue-collar', 'divorced', 'unknown'),
@@ -1512,7 +1526,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (1499, 36, 'services', 'married', 'high.school'),
 (1500, 38, 'blue-collar', 'married', 'basic.6y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (1501, 33, 'admin.', 'married', 'high.school'),
 (1502, 41, 'services', 'divorced', 'high.school'),
 (1503, 58, 'services', 'married', 'basic.4y'),
@@ -2014,7 +2028,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (1999, 47, 'services', 'divorced', 'high.school'),
 (2000, 47, 'blue-collar', 'single', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (2001, 42, 'self-employed', 'married', 'university.degree'),
 (2002, 42, 'management', 'married', 'university.degree'),
 (2003, 59, 'management', 'married', 'university.degree'),
@@ -2516,7 +2530,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (2499, 49, 'services', 'married', 'high.school'),
 (2500, 50, 'housemaid', 'single', 'unknown');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (2501, 40, 'blue-collar', 'single', 'basic.9y'),
 (2502, 50, 'services', 'married', 'unknown'),
 (2503, 30, 'technician', 'married', 'university.degree'),
@@ -3018,7 +3032,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (2999, 35, 'technician', 'married', 'professional.course'),
 (3000, 42, 'blue-collar', 'married', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (3001, 35, 'technician', 'married', 'professional.course'),
 (3002, 54, 'self-employed', 'married', 'professional.course'),
 (3003, 36, 'blue-collar', 'married', 'basic.9y'),
@@ -3520,7 +3534,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (3499, 36, 'blue-collar', 'married', 'high.school'),
 (3500, 48, 'entrepreneur', 'married', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (3501, 28, 'student', 'single', 'basic.9y'),
 (3502, 55, 'unemployed', 'married', 'basic.4y'),
 (3503, 31, 'blue-collar', 'married', 'basic.9y'),
@@ -4022,7 +4036,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (3999, 52, 'management', 'married', 'high.school'),
 (4000, 56, 'housemaid', 'married', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (4001, 36, 'blue-collar', 'married', 'basic.6y'),
 (4002, 45, 'admin.', 'married', 'university.degree'),
 (4003, 31, 'self-employed', 'married', 'university.degree'),
@@ -4524,7 +4538,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (4499, 34, 'blue-collar', 'married', 'basic.4y'),
 (4500, 58, 'unemployed', 'married', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (4501, 50, 'admin.', 'single', 'university.degree'),
 (4502, 44, 'blue-collar', 'married', 'basic.9y'),
 (4503, 48, 'blue-collar', 'married', 'professional.course'),
@@ -5026,7 +5040,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (4999, 36, 'services', 'single', 'high.school'),
 (5000, 46, 'entrepreneur', 'married', 'professional.course');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (5001, 44, 'unknown', 'married', 'basic.6y'),
 (5002, 37, 'blue-collar', 'single', 'high.school'),
 (5003, 26, 'admin.', 'married', 'university.degree'),
@@ -5528,7 +5542,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (5499, 41, 'self-employed', 'married', 'high.school'),
 (5500, 28, 'self-employed', 'married', 'professional.course');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (5501, 42, 'technician', 'single', 'high.school'),
 (5502, 38, 'blue-collar', 'married', 'unknown'),
 (5503, 41, 'blue-collar', 'divorced', 'basic.4y'),
@@ -6030,7 +6044,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (5999, 29, 'technician', 'single', 'university.degree'),
 (6000, 27, 'admin.', 'single', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (6001, 42, 'blue-collar', 'married', 'basic.6y'),
 (6002, 49, 'technician', 'married', 'professional.course'),
 (6003, 49, 'blue-collar', 'married', 'basic.4y'),
@@ -6532,7 +6546,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (6499, 37, 'blue-collar', 'single', 'basic.9y'),
 (6500, 34, 'technician', 'married', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (6501, 34, 'technician', 'married', 'university.degree'),
 (6502, 33, 'self-employed', 'married', 'university.degree'),
 (6503, 34, 'technician', 'married', 'university.degree'),
@@ -7034,7 +7048,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (6999, 45, 'blue-collar', 'married', 'basic.9y'),
 (7000, 43, 'management', 'single', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (7001, 32, 'technician', 'married', 'professional.course'),
 (7002, 48, 'blue-collar', 'married', 'basic.6y'),
 (7003, 46, 'blue-collar', 'married', 'basic.9y'),
@@ -7536,7 +7550,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (7499, 25, 'admin.', 'single', 'unknown'),
 (7500, 24, 'blue-collar', 'married', 'basic.9y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (7501, 30, 'admin.', 'married', 'unknown'),
 (7502, 37, 'admin.', 'married', 'high.school'),
 (7503, 60, 'blue-collar', 'married', 'basic.4y'),
@@ -8038,7 +8052,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (7999, 36, 'services', 'single', 'basic.6y'),
 (8000, 33, 'blue-collar', 'single', 'basic.9y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (8001, 55, 'blue-collar', 'married', 'basic.4y'),
 (8002, 42, 'retired', 'married', 'basic.9y'),
 (8003, 42, 'services', 'married', 'high.school'),
@@ -8540,7 +8554,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (8499, 56, 'blue-collar', 'married', 'basic.9y'),
 (8500, 26, 'blue-collar', 'married', 'basic.9y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (8501, 50, 'admin.', 'married', 'university.degree'),
 (8502, 34, 'entrepreneur', 'married', 'basic.4y'),
 (8503, 52, 'retired', 'married', 'basic.4y'),
@@ -9042,7 +9056,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (8999, 41, 'admin.', 'married', 'high.school'),
 (9000, 32, 'services', 'married', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (9001, 52, 'housemaid', 'married', 'basic.4y'),
 (9002, 39, 'admin.', 'married', 'high.school'),
 (9003, 47, 'blue-collar', 'married', 'basic.9y'),
@@ -9544,7 +9558,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (9499, 50, 'blue-collar', 'single', 'basic.9y'),
 (9500, 37, 'technician', 'married', 'basic.9y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (9501, 51, 'entrepreneur', 'divorced', 'university.degree'),
 (9502, 48, 'technician', 'married', 'professional.course'),
 (9503, 39, 'blue-collar', 'married', 'basic.4y'),
@@ -10046,7 +10060,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (9999, 41, 'technician', 'married', 'professional.course'),
 (10000, 40, 'services', 'divorced', 'unknown');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (10001, 28, 'admin.', 'single', 'university.degree'),
 (10002, 30, 'services', 'married', 'high.school'),
 (10003, 25, 'blue-collar', 'single', 'basic.4y'),
@@ -10548,7 +10562,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (10499, 29, 'blue-collar', 'married', 'basic.9y'),
 (10500, 43, 'admin.', 'married', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (10501, 31, 'admin.', 'divorced', 'high.school'),
 (10502, 37, 'technician', 'single', 'university.degree'),
 (10503, 54, 'services', 'married', 'unknown'),
@@ -11050,7 +11064,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (10999, 54, 'unemployed', 'married', 'high.school'),
 (11000, 52, 'blue-collar', 'divorced', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (11001, 55, 'management', 'single', 'basic.4y'),
 (11002, 38, 'blue-collar', 'married', 'basic.9y'),
 (11003, 42, 'blue-collar', 'married', 'high.school'),
@@ -11552,7 +11566,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (11499, 47, 'services', 'married', 'high.school'),
 (11500, 47, 'services', 'married', 'basic.6y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (11501, 38, 'services', 'married', 'basic.9y'),
 (11502, 33, 'blue-collar', 'married', 'basic.4y'),
 (11503, 43, 'blue-collar', 'married', 'basic.4y'),
@@ -12054,7 +12068,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (11999, 59, 'retired', 'married', 'basic.9y'),
 (12000, 42, 'services', 'single', 'unknown');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (12001, 58, 'services', 'married', 'basic.4y'),
 (12002, 51, 'services', 'married', 'professional.course'),
 (12003, 31, 'blue-collar', 'married', 'basic.4y'),
@@ -12556,7 +12570,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (12499, 48, 'blue-collar', 'divorced', 'basic.4y'),
 (12500, 43, 'services', 'single', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (12501, 28, 'admin.', 'single', 'university.degree'),
 (12502, 36, 'blue-collar', 'married', 'high.school'),
 (12503, 43, 'admin.', 'married', 'high.school'),
@@ -13058,7 +13072,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (12999, 59, 'housemaid', 'married', 'basic.4y'),
 (13000, 28, 'services', 'married', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (13001, 28, 'services', 'married', 'high.school'),
 (13002, 32, 'technician', 'single', 'professional.course'),
 (13003, 26, 'management', 'single', 'university.degree'),
@@ -13560,7 +13574,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (13499, 39, 'blue-collar', 'married', 'basic.9y'),
 (13500, 39, 'blue-collar', 'married', 'basic.9y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (13501, 27, 'technician', 'single', 'professional.course'),
 (13502, 57, 'retired', 'divorced', 'high.school'),
 (13503, 34, 'technician', 'single', 'university.degree'),
@@ -14062,7 +14076,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (13999, 25, 'unemployed', 'married', 'university.degree'),
 (14000, 31, 'blue-collar', 'married', 'basic.6y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (14001, 53, 'management', 'married', 'basic.9y'),
 (14002, 35, 'blue-collar', 'single', 'basic.9y'),
 (14003, 29, 'services', 'married', 'basic.9y'),
@@ -14564,7 +14578,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (14499, 37, 'blue-collar', 'married', 'basic.4y'),
 (14500, 45, 'blue-collar', 'married', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (14501, 25, 'entrepreneur', 'single', 'university.degree'),
 (14502, 26, 'admin.', 'single', 'university.degree'),
 (14503, 46, 'technician', 'divorced', 'professional.course'),
@@ -15066,7 +15080,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (14999, 26, 'technician', 'single', 'university.degree'),
 (15000, 36, 'blue-collar', 'married', 'basic.6y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (15001, 34, 'entrepreneur', 'married', 'professional.course'),
 (15002, 30, 'admin.', 'married', 'basic.6y'),
 (15003, 38, 'blue-collar', 'married', 'basic.9y'),
@@ -15568,7 +15582,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (15499, 46, 'admin.', 'single', 'university.degree'),
 (15500, 34, 'admin.', 'single', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (15501, 39, 'blue-collar', 'married', 'basic.9y'),
 (15502, 38, 'entrepreneur', 'married', 'basic.9y'),
 (15503, 26, 'services', 'single', 'high.school'),
@@ -16070,7 +16084,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (15999, 30, 'unemployed', 'married', 'high.school'),
 (16000, 48, 'technician', 'single', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (16001, 30, 'services', 'single', 'high.school'),
 (16002, 54, 'retired', 'divorced', 'university.degree'),
 (16003, 57, 'housemaid', 'divorced', 'basic.6y'),
@@ -16572,7 +16586,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (16499, 36, 'blue-collar', 'single', 'basic.6y'),
 (16500, 44, 'admin.', 'married', 'basic.6y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (16501, 30, 'management', 'married', 'university.degree'),
 (16502, 36, 'services', 'married', 'high.school'),
 (16503, 32, 'technician', 'single', 'high.school'),
@@ -17074,7 +17088,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (16999, 28, 'blue-collar', 'married', 'basic.4y'),
 (17000, 33, 'technician', 'single', 'basic.9y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (17001, 43, 'blue-collar', 'married', 'basic.9y'),
 (17002, 47, 'technician', 'divorced', 'high.school'),
 (17003, 30, 'blue-collar', 'married', 'basic.4y'),
@@ -17576,7 +17590,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (17499, 26, 'blue-collar', 'single', 'high.school'),
 (17500, 59, 'admin.', 'divorced', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (17501, 37, 'admin.', 'married', 'university.degree'),
 (17502, 51, 'technician', 'married', 'basic.9y'),
 (17503, 40, 'self-employed', 'married', 'unknown'),
@@ -18078,7 +18092,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (17999, 47, 'housemaid', 'married', 'basic.4y'),
 (18000, 31, 'housemaid', 'single', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (18001, 60, 'blue-collar', 'divorced', 'basic.4y'),
 (18002, 44, 'blue-collar', 'married', 'basic.6y'),
 (18003, 53, 'housemaid', 'married', 'basic.4y'),
@@ -18580,7 +18594,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (18499, 42, 'blue-collar', 'married', 'basic.9y'),
 (18500, 53, 'blue-collar', 'married', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (18501, 39, 'services', 'married', 'high.school'),
 (18502, 52, 'blue-collar', 'married', 'basic.9y'),
 (18503, 26, 'blue-collar', 'married', 'high.school'),
@@ -19082,7 +19096,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (18999, 30, 'technician', 'single', 'high.school'),
 (19000, 56, 'retired', 'married', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (19001, 47, 'entrepreneur', 'married', 'university.degree'),
 (19002, 47, 'entrepreneur', 'married', 'university.degree'),
 (19003, 52, 'technician', 'divorced', 'professional.course'),
@@ -19584,7 +19598,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (19499, 35, 'technician', 'single', 'university.degree'),
 (19500, 35, 'technician', 'single', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (19501, 31, 'self-employed', 'married', 'basic.4y'),
 (19502, 35, 'technician', 'single', 'university.degree'),
 (19503, 31, 'admin.', 'single', 'university.degree'),
@@ -20086,7 +20100,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (19999, 33, 'technician', 'married', 'professional.course'),
 (20000, 42, 'self-employed', 'married', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (20001, 42, 'self-employed', 'married', 'university.degree'),
 (20002, 35, 'technician', 'divorced', 'professional.course'),
 (20003, 38, 'entrepreneur', 'married', 'university.degree'),
@@ -20588,7 +20602,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (20499, 32, 'technician', 'married', 'university.degree'),
 (20500, 37, 'admin.', 'divorced', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (20501, 33, 'technician', 'married', 'professional.course'),
 (20502, 43, 'admin.', 'divorced', 'university.degree'),
 (20503, 39, 'self-employed', 'married', 'basic.9y'),
@@ -21090,7 +21104,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (20999, 31, 'housemaid', 'married', 'basic.6y'),
 (21000, 56, 'blue-collar', 'married', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (21001, 58, 'technician', 'married', 'high.school'),
 (21002, 30, 'technician', 'married', 'professional.course'),
 (21003, 36, 'self-employed', 'married', 'basic.9y'),
@@ -21592,7 +21606,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (21499, 31, 'technician', 'married', 'professional.course'),
 (21500, 55, 'technician', 'married', 'professional.course');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (21501, 36, 'technician', 'married', 'university.degree'),
 (21502, 47, 'blue-collar', 'married', 'basic.9y'),
 (21503, 36, 'admin.', 'married', 'university.degree'),
@@ -22094,7 +22108,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (21999, 29, 'technician', 'single', 'high.school'),
 (22000, 31, 'technician', 'single', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (22001, 36, 'technician', 'married', 'professional.course'),
 (22002, 40, 'admin.', 'divorced', 'university.degree'),
 (22003, 53, 'admin.', 'married', 'high.school'),
@@ -22596,7 +22610,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (22499, 49, 'blue-collar', 'married', 'basic.6y'),
 (22500, 30, 'technician', 'single', 'professional.course');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (22501, 29, 'technician', 'single', 'university.degree'),
 (22502, 30, 'technician', 'single', 'university.degree'),
 (22503, 29, 'admin.', 'single', 'university.degree'),
@@ -23098,7 +23112,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (22999, 55, 'management', 'married', 'university.degree'),
 (23000, 47, 'unknown', 'married', 'unknown');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (23001, 58, 'retired', 'married', 'university.degree'),
 (23002, 38, 'admin.', 'married', 'university.degree'),
 (23003, 51, 'admin.', 'married', 'university.degree'),
@@ -23600,7 +23614,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (23499, 57, 'management', 'married', 'university.degree'),
 (23500, 31, 'admin.', 'single', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (23501, 30, 'technician', 'single', 'university.degree'),
 (23502, 35, 'admin.', 'married', 'university.degree'),
 (23503, 41, 'admin.', 'married', 'university.degree'),
@@ -24102,7 +24116,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (23999, 42, 'admin.', 'married', 'high.school'),
 (24000, 39, 'blue-collar', 'married', 'basic.9y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (24001, 56, 'unknown', 'married', 'unknown'),
 (24002, 30, 'entrepreneur', 'married', 'university.degree'),
 (24003, 43, 'technician', 'single', 'professional.course'),
@@ -24604,7 +24618,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (24499, 29, 'self-employed', 'single', 'university.degree'),
 (24500, 31, 'self-employed', 'single', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (24501, 52, 'self-employed', 'married', 'university.degree'),
 (24502, 52, 'entrepreneur', 'single', 'university.degree'),
 (24503, 35, 'blue-collar', 'married', 'high.school'),
@@ -25106,7 +25120,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (24999, 35, 'admin.', 'divorced', 'university.degree'),
 (25000, 50, 'entrepreneur', 'married', 'basic.9y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (25001, 30, 'admin.', 'single', 'university.degree'),
 (25002, 35, 'admin.', 'divorced', 'university.degree'),
 (25003, 32, 'technician', 'single', 'university.degree'),
@@ -25608,7 +25622,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (25499, 31, 'admin.', 'married', 'university.degree'),
 (25500, 37, 'management', 'married', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (25501, 29, 'admin.', 'divorced', 'basic.9y'),
 (25502, 30, 'self-employed', 'married', 'high.school'),
 (25503, 32, 'unemployed', 'divorced', 'high.school'),
@@ -26110,7 +26124,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (25999, 34, 'admin.', 'married', 'university.degree'),
 (26000, 49, 'admin.', 'divorced', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (26001, 53, 'blue-collar', 'divorced', 'basic.9y'),
 (26002, 31, 'services', 'single', 'high.school'),
 (26003, 51, 'unemployed', 'divorced', 'university.degree'),
@@ -26612,7 +26626,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (26499, 30, 'entrepreneur', 'single', 'university.degree'),
 (26500, 32, 'entrepreneur', 'married', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (26501, 34, 'services', 'married', 'basic.4y'),
 (26502, 30, 'blue-collar', 'single', 'basic.9y'),
 (26503, 46, 'blue-collar', 'single', 'basic.4y'),
@@ -27114,7 +27128,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (26999, 31, 'entrepreneur', 'single', 'university.degree'),
 (27000, 30, 'blue-collar', 'married', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (27001, 42, 'technician', 'married', 'professional.course'),
 (27002, 29, 'management', 'married', 'university.degree'),
 (27003, 35, 'admin.', 'single', 'high.school'),
@@ -27616,7 +27630,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (27499, 40, 'management', 'single', 'university.degree'),
 (27500, 54, 'admin.', 'divorced', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (27501, 29, 'technician', 'single', 'professional.course'),
 (27502, 34, 'admin.', 'single', 'university.degree'),
 (27503, 38, 'technician', 'single', 'professional.course'),
@@ -28118,7 +28132,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (27999, 38, 'admin.', 'divorced', 'university.degree'),
 (28000, 44, 'admin.', 'married', 'unknown');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (28001, 32, 'technician', 'married', 'professional.course'),
 (28002, 56, 'entrepreneur', 'divorced', 'university.degree'),
 (28003, 43, 'self-employed', 'married', 'high.school'),
@@ -28620,7 +28634,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (28499, 30, 'admin.', 'married', 'university.degree'),
 (28500, 30, 'admin.', 'married', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (28501, 45, 'blue-collar', 'married', 'basic.9y'),
 (28502, 46, 'blue-collar', 'divorced', 'basic.9y'),
 (28503, 30, 'admin.', 'married', 'university.degree'),
@@ -29122,7 +29136,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (28999, 46, 'management', 'married', 'university.degree'),
 (29000, 35, 'blue-collar', 'married', 'unknown');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (29001, 48, 'admin.', 'single', 'university.degree'),
 (29002, 47, 'admin.', 'married', 'high.school'),
 (29003, 42, 'management', 'married', 'university.degree'),
@@ -29624,7 +29638,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (29499, 73, 'retired', 'married', 'basic.4y'),
 (29500, 54, 'technician', 'married', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (29501, 31, 'technician', 'single', 'professional.course'),
 (29502, 46, 'blue-collar', 'married', 'basic.9y'),
 (29503, 31, 'blue-collar', 'single', 'basic.9y'),
@@ -30126,7 +30140,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (29999, 34, 'admin.', 'divorced', 'high.school'),
 (30000, 34, 'admin.', 'divorced', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (30001, 75, 'retired', 'married', 'basic.4y'),
 (30002, 53, 'admin.', 'married', 'university.degree'),
 (30003, 31, 'technician', 'single', 'university.degree'),
@@ -30628,7 +30642,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (30499, 27, 'management', 'single', 'university.degree'),
 (30500, 35, 'services', 'married', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (30501, 26, 'admin.', 'single', 'university.degree'),
 (30502, 30, 'unemployed', 'married', 'high.school'),
 (30503, 59, 'retired', 'married', 'basic.6y'),
@@ -31130,7 +31144,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (30999, 57, 'blue-collar', 'married', 'basic.4y'),
 (31000, 39, 'admin.', 'single', 'professional.course');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (31001, 34, 'technician', 'married', 'professional.course'),
 (31002, 40, 'technician', 'married', 'professional.course'),
 (31003, 44, 'admin.', 'married', 'university.degree'),
@@ -31632,7 +31646,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (31499, 36, 'blue-collar', 'married', 'basic.9y'),
 (31500, 45, 'services', 'divorced', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (31501, 28, 'blue-collar', 'single', 'basic.9y'),
 (31502, 29, 'student', 'single', 'basic.9y'),
 (31503, 41, 'blue-collar', 'married', 'basic.4y'),
@@ -32134,7 +32148,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (31999, 31, 'management', 'single', 'university.degree'),
 (32000, 53, 'blue-collar', 'married', 'basic.9y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (32001, 37, 'admin.', 'single', 'university.degree'),
 (32002, 49, 'blue-collar', 'married', 'basic.9y'),
 (32003, 32, 'blue-collar', 'married', 'basic.9y'),
@@ -32636,7 +32650,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (32499, 32, 'admin.', 'married', 'high.school'),
 (32500, 30, 'admin.', 'married', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (32501, 25, 'admin.', 'single', 'high.school'),
 (32502, 44, 'blue-collar', 'married', 'basic.4y'),
 (32503, 45, 'technician', 'single', 'university.degree'),
@@ -33138,7 +33152,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (32999, 40, 'services', 'married', 'high.school'),
 (33000, 34, 'admin.', 'unknown', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (33001, 37, 'entrepreneur', 'married', 'basic.9y'),
 (33002, 33, 'blue-collar', 'single', 'basic.9y'),
 (33003, 47, 'blue-collar', 'married', 'basic.6y'),
@@ -33640,7 +33654,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (33499, 43, 'blue-collar', 'married', 'basic.4y'),
 (33500, 34, 'admin.', 'married', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (33501, 27, 'technician', 'married', 'professional.course'),
 (33502, 27, 'blue-collar', 'married', 'basic.4y'),
 (33503, 41, 'blue-collar', 'married', 'basic.6y'),
@@ -34142,7 +34156,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (33999, 36, 'services', 'single', 'high.school'),
 (34000, 48, 'blue-collar', 'married', 'basic.6y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (34001, 58, 'retired', 'married', 'university.degree'),
 (34002, 35, 'blue-collar', 'married', 'basic.6y'),
 (34003, 29, 'blue-collar', 'married', 'basic.9y'),
@@ -34644,7 +34658,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (34499, 33, 'admin.', 'single', 'high.school'),
 (34500, 23, 'blue-collar', 'single', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (34501, 21, 'admin.', 'single', 'high.school'),
 (34502, 34, 'technician', 'married', 'professional.course'),
 (34503, 26, 'blue-collar', 'married', 'basic.9y'),
@@ -35146,7 +35160,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (34999, 30, 'services', 'single', 'high.school'),
 (35000, 47, 'blue-collar', 'married', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (35001, 47, 'blue-collar', 'married', 'high.school'),
 (35002, 39, 'admin.', 'divorced', 'high.school'),
 (35003, 44, 'self-employed', 'married', 'university.degree'),
@@ -35648,7 +35662,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (35499, 47, 'management', 'married', 'high.school'),
 (35500, 23, 'blue-collar', 'single', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (35501, 46, 'blue-collar', 'married', 'basic.9y'),
 (35502, 23, 'blue-collar', 'single', 'high.school'),
 (35503, 34, 'admin.', 'single', 'university.degree'),
@@ -36150,7 +36164,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (35999, 49, 'blue-collar', 'married', 'basic.9y'),
 (36000, 60, 'retired', 'married', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (36001, 32, 'admin.', 'married', 'university.degree'),
 (36002, 65, 'retired', 'married', 'unknown'),
 (36003, 30, 'housemaid', 'married', 'high.school'),
@@ -36652,7 +36666,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (36499, 29, 'technician', 'single', 'university.degree'),
 (36500, 34, 'technician', 'married', 'professional.course');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (36501, 29, 'technician', 'single', 'university.degree'),
 (36502, 29, 'technician', 'single', 'university.degree'),
 (36503, 30, 'blue-collar', 'single', 'high.school'),
@@ -37154,7 +37168,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (36999, 75, 'retired', 'married', 'basic.4y'),
 (37000, 58, 'admin.', 'married', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (37001, 34, 'admin.', 'married', 'high.school'),
 (37002, 35, 'technician', 'married', 'university.degree'),
 (37003, 56, 'retired', 'married', 'high.school'),
@@ -37656,7 +37670,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (37499, 36, 'services', 'married', 'high.school'),
 (37500, 32, 'services', 'married', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (37501, 34, 'self-employed', 'single', 'university.degree'),
 (37502, 24, 'technician', 'single', 'professional.course'),
 (37503, 28, 'unemployed', 'single', 'university.degree'),
@@ -38158,7 +38172,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (37999, 66, 'management', 'divorced', 'university.degree'),
 (38000, 76, 'retired', 'divorced', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (38001, 39, 'self-employed', 'divorced', 'high.school'),
 (38002, 30, 'self-employed', 'single', 'university.degree'),
 (38003, 29, 'self-employed', 'single', 'university.degree'),
@@ -38660,7 +38674,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (38499, 22, 'student', 'single', 'basic.6y'),
 (38500, 22, 'student', 'single', 'basic.6y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (38501, 30, 'technician', 'married', 'professional.course'),
 (38502, 32, 'admin.', 'single', 'university.degree'),
 (38503, 39, 'admin.', 'married', 'professional.course'),
@@ -39162,7 +39176,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (38999, 48, 'admin.', 'married', 'university.degree'),
 (39000, 50, 'technician', 'married', 'high.school');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (39001, 38, 'technician', 'single', 'university.degree'),
 (39002, 73, 'retired', 'married', 'basic.4y'),
 (39003, 38, 'unemployed', 'single', 'high.school'),
@@ -39664,7 +39678,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (39499, 80, 'retired', 'divorced', 'basic.4y'),
 (39500, 32, 'admin.', 'single', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (39501, 43, 'admin.', 'divorced', 'university.degree'),
 (39502, 41, 'admin.', 'married', 'university.degree'),
 (39503, 63, 'housemaid', 'married', 'basic.9y'),
@@ -40166,7 +40180,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (39999, 33, 'services', 'married', 'high.school'),
 (40000, 56, 'retired', 'married', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (40001, 29, 'technician', 'single', 'high.school'),
 (40002, 86, 'retired', 'single', 'basic.9y'),
 (40003, 21, 'student', 'single', 'high.school'),
@@ -40668,7 +40682,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (40499, 36, 'services', 'single', 'university.degree'),
 (40500, 30, 'admin.', 'single', 'university.degree');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (40501, 32, 'admin.', 'married', 'university.degree'),
 (40502, 48, 'self-employed', 'divorced', 'university.degree'),
 (40503, 28, 'admin.', 'married', 'university.degree'),
@@ -41170,7 +41184,7 @@ INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUE
 (40999, 34, 'technician', 'married', 'university.degree'),
 (41000, 61, 'housemaid', 'married', 'basic.4y');
 
-INSERT INTO retail_banking_crm (customer_id, age, job, marital, education) VALUES
+INSERT INTO stage.retail_banking_crm (customer_id, age, job, marital, education) VALUES
 (41001, 54, 'services', 'divorced', 'high.school'),
 (41002, 38, 'admin.', 'divorced', 'basic.9y'),
 (41003, 45, 'student', 'single', 'unknown'),

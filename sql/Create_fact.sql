@@ -1,6 +1,16 @@
 USE DWBI_Bank;
 GO
 
+-- ============================================================================
+-- Layer: Enterprise Data Warehouse (EDW) Layer (Tier 3)
+-- Namespace: dw (Clean, indexed dimensional model)
+-- Table: dw.fact_contact
+-- Description: Central fact table recording marketing telemarketing contacts
+-- ============================================================================
+IF OBJECT_ID('dw.fact_contact', 'U') IS NOT NULL
+    DROP TABLE dw.fact_contact;
+GO
+
 CREATE TABLE dw.fact_contact (
     contact_id INT PRIMARY KEY,
     profile_key INT NOT NULL,
@@ -28,6 +38,15 @@ CREATE TABLE dw.fact_contact (
 );
 GO
 
+-- Non-clustered performance indexes on foreign key dimensions (EDW Star Schema Optimization)
+CREATE NONCLUSTERED INDEX IX_fact_contact_profile ON dw.fact_contact (profile_key);
+CREATE NONCLUSTERED INDEX IX_fact_contact_month ON dw.fact_contact (month_key);
+CREATE NONCLUSTERED INDEX IX_fact_contact_weekday ON dw.fact_contact (weekday_key);
+CREATE NONCLUSTERED INDEX IX_fact_contact_channel ON dw.fact_contact (channel_key);
+CREATE NONCLUSTERED INDEX IX_fact_contact_outcome ON dw.fact_contact (outcome_key);
+CREATE NONCLUSTERED INDEX IX_fact_contact_subscription ON dw.fact_contact (is_subscribed) INCLUDE (contact_count, duration_seconds);
+GO
+
 INSERT INTO dw.fact_contact (
     contact_id, profile_key, month_key, weekday_key, channel_key,
     outcome_key, contact_count, is_subscribed, duration_seconds,
@@ -53,7 +72,7 @@ SELECT
     e.euribor3m,
     e.nr_employed
 FROM stage.marketing_call_center AS m
-JOIN dbo.retail_banking_crm AS c
+JOIN stage.retail_banking_crm AS c
     ON m.customer_id = c.customer_id
 JOIN stage.credit_and_risk AS r
     ON m.customer_id = r.customer_id

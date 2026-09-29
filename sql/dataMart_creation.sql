@@ -1,6 +1,16 @@
 USE DWBI_Bank;
 GO
 
+-- ============================================================================
+-- Layer: Analytical Data Marts Layer (Tier 4)
+-- Namespace: mart
+-- Table: mart.marketing_performance
+-- Description: Aggregated departmental rollup for BI dashboards and reporting
+-- ============================================================================
+IF OBJECT_ID('mart.marketing_performance', 'U') IS NOT NULL
+    DROP TABLE mart.marketing_performance;
+GO
+
 CREATE TABLE mart.marketing_performance (
     month_key TINYINT NOT NULL,
     job VARCHAR(50) NOT NULL,
@@ -11,6 +21,7 @@ CREATE TABLE mart.marketing_performance (
     PRIMARY KEY (month_key, job, channel_key)
 );
 GO
+
 
 INSERT INTO mart.marketing_performance
     (month_key, job, channel_key, contacts, subscriptions, total_duration_seconds)

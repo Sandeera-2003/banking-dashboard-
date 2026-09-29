@@ -1,7 +1,25 @@
 USE DWBI_Bank;
 GO
-CREATE TABLE dw.dim_month (month_key TINYINT PRIMARY KEY, month_abbr CHAR(3) NOT NULL UNIQUE, month_name VARCHAR(15) NOT NULL, quarter_no TINYINT NOT NULL);
+
+-- ============================================================================
+-- Layer: Enterprise Data Warehouse (EDW) Layer (Tier 3)
+-- Namespace: dw (Clean, indexed dimensional model)
+-- Table: dw.dim_month
+-- ============================================================================
+IF OBJECT_ID('dw.dim_month', 'U') IS NOT NULL
+    DROP TABLE dw.dim_month;
+GO
+
+CREATE TABLE dw.dim_month (
+    month_key TINYINT PRIMARY KEY, 
+    month_abbr CHAR(3) NOT NULL UNIQUE, 
+    month_name VARCHAR(15) NOT NULL, 
+    quarter_no TINYINT NOT NULL
+);
+GO
+
 INSERT INTO dw.dim_month (month_key, month_abbr, month_name, quarter_no) VALUES 
+
 (1,'jan','January',1),
 (2,'feb','February',1),
 (3,'mar','March',1),

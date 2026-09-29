@@ -1,4 +1,4 @@
-﻿customer_id,emp_var_rate,cons_price_idx,cons_conf_idx,euribor3m,nr_employed
+customer_id,emp_var_rate,cons_price_idx,cons_conf_idx,euribor3m,nr_employed
 1,1.1,93.994,-36.4,4.857,5191.0
 2,1.1,93.994,-36.4,4.857,5191.0
 3,1.1,93.994,-36.4,4.857,5191.0

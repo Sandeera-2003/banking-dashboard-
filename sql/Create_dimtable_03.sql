@@ -1,6 +1,16 @@
 USE DWBI_Bank;
 GO
 
+-- ============================================================================
+-- Layer: Enterprise Data Warehouse (EDW) Layer (Tier 3)
+-- Namespace: dw (Clean, indexed dimensional model)
+-- Table: dw.dim_customer_profile
+-- Source: stage.retail_banking_crm & stage.credit_and_risk
+-- ============================================================================
+IF OBJECT_ID('dw.dim_customer_profile', 'U') IS NOT NULL
+    DROP TABLE dw.dim_customer_profile;
+GO
+
 CREATE TABLE dw.dim_customer_profile (
     profile_key INT IDENTITY(1,1) PRIMARY KEY,
     age INT NOT NULL,
@@ -27,7 +37,7 @@ SELECT DISTINCT
     END,
     c.job, c.marital, c.education,
     r.[default], r.housing, r.loan
-FROM dbo.retail_banking_crm AS c
+FROM stage.retail_banking_crm AS c
 JOIN stage.credit_and_risk AS r ON c.customer_id = r.customer_id;
 GO
 
