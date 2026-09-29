@@ -104,10 +104,19 @@ JOIN dw.dim_previous_outcome AS po
     ON po.previous_outcome = m.poutcome;
 GO
 
+-- Standardized view alias for architectural naming parity with fact_bank_marketing
+IF OBJECT_ID('dw.fact_bank_marketing', 'V') IS NOT NULL
+    DROP VIEW dw.fact_bank_marketing;
+GO
+
+CREATE VIEW dw.fact_bank_marketing AS
+SELECT * FROM dw.fact_contact;
+GO
+
 SELECT 
     COUNT(*) AS total_contacts, 
     COUNT(DISTINCT customer_sk) AS unique_customers_contacted,
     SUM(is_subscribed) AS subscriptions,
     CAST(AVG(CAST(duration_seconds AS FLOAT)) AS DECIMAL(10,2)) AS avg_duration_sec
-FROM dw.fact_contact;
+FROM dw.fact_bank_marketing;
 GO

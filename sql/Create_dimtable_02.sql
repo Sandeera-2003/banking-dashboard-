@@ -58,8 +58,34 @@ INSERT INTO dw.dim_previous_outcome (previous_outcome)
 SELECT DISTINCT poutcome FROM stage.marketing_call_center;
 GO
 
+-- 4. Dimension: Campaign Contacts & Band (Entity Dimension)
+IF OBJECT_ID('dw.dim_campaign', 'U') IS NOT NULL
+    DROP TABLE dw.dim_campaign;
+GO
+
+CREATE TABLE dw.dim_campaign (
+    campaign_key INT IDENTITY(1,1) PRIMARY KEY,
+    campaign_contacts INT NOT NULL UNIQUE,
+    campaign_band VARCHAR(20) NOT NULL
+);
+GO
+
+INSERT INTO dw.dim_campaign (campaign_contacts, campaign_band)
+SELECT DISTINCT 
+    campaign,
+    CASE 
+        WHEN campaign = 1 THEN '1 contact'
+        WHEN campaign BETWEEN 2 AND 3 THEN '2-3 contacts'
+        WHEN campaign BETWEEN 4 AND 5 THEN '4-5 contacts'
+        ELSE '6+ contacts'
+    END
+FROM stage.marketing_call_center
+ORDER BY campaign;
+GO
+
 SELECT 
     (SELECT COUNT(*) FROM DWBI_Bank.dw.dim_channel) AS channels, 
     (SELECT COUNT(*) FROM DWBI_Bank.dw.dim_weekday) AS weekdays, 
-    (SELECT COUNT(*) FROM DWBI_Bank.dw.dim_previous_outcome) AS previous_outcomes;
+    (SELECT COUNT(*) FROM DWBI_Bank.dw.dim_previous_outcome) AS previous_outcomes,
+    (SELECT COUNT(*) FROM DWBI_Bank.dw.dim_campaign) AS campaigns;
 GO
